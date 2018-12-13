@@ -5,5 +5,7 @@
     "city2_id": 2158177,
     "appid": "14262d4113fbadcd12adf2a503a900d4",
     "query_interval_sec": 30,
-    "update_interval_sec": 1
+    "update_interval_sec": 1,
+    "scl_pin": 4,
+    "sda_pin": 5
 }
