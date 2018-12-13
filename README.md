@@ -1,5 +1,5 @@
 
-![CIty Temps Example](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+![CIty Temps Example](images/citytemps.gif)
 
 ## Installation
 
