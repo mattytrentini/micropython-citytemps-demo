@@ -1,4 +1,6 @@
 
+![CIty Temps Example](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+
 ## Installation
 
 Copy contents of `src` to the root of a MicroPython-enabled device.
