@@ -1,9 +1,9 @@
 {
     "ssid": "TestNetwork",
     "ssid_password": "TestNetworkPassword",
+    "appid": "b1b15e88fa797225412429c1c50c122a1",
     "city1_id": 7286283,
     "city2_id": 2158177,
-    "appid": "14262d4113fbadcd12adf2a503a900d4",
     "query_interval_sec": 30,
     "update_interval_sec": 1,
     "scl_pin": 4,
