@@ -44,7 +44,7 @@ while True:
     r = requests.get(api_root + api_params.format(config['city1_id'],
                                                   config['city2_id'],
                                                   config['appid']))
-    # TODO Check return code. How to hand if not 200?
+    # TODO Check return code. How to handle if not 200?
     # if r.status_code == 200:
 
     # Parse JSON for city names and temperatures
@@ -72,7 +72,7 @@ while True:
     # Sleep, update progress
     while time.ticks_diff(time.ticks_ms(), start) < config['query_interval_sec'] * 1000:
         time.sleep(config['update_interval_sec'])
-        next_query_percent = (time.ticks_diff(time.ticks_ms(), start) / (config['query_interval_sec'] * 1000)
+        next_query_percent = time.ticks_diff(time.ticks_ms(), start) / (config['query_interval_sec'] * 1000)
         oled.line(oled.width - int(oled.width * next_query_percent), oled.height - 1,
                   oled.width, oled.height - 1,
                   0)
