@@ -11,7 +11,7 @@ Tested on a Wemos with OLED display (as pictured).
 Copying the files to the device is easy with [rshell](https://github.com/dhylands/rshell):
 
 ```sh
->matt:~/code/micropython-citytemps-demo/$ rshell -p /dev/ttyUSB0 rsync . /pyboard
+>matt:~/code/micropython-citytemps-demo/src$ rshell -p /dev/ttyUSB0 rsync . /pyboard
 ```
 
 ## Configuration
