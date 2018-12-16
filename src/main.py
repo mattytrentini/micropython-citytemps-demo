@@ -48,7 +48,7 @@ while True:
     # if r.status_code == 200:
 
     # Parse JSON for city names and temperatures
-    city_temps = [(city['name'], city['main']['temp']) for city in r.json()['list']]
+    city_temps = [{'name': city['name'], 'temperature': city['main']['temp']} for city in r.json()['list']]
     r.close()
     start = time.ticks_ms()
 
@@ -57,12 +57,12 @@ while True:
     oled.fill_rect(0, oled.height // 2, oled.width, oled.height, 0)
 
     # Display city names
-    oled.text(city_temps[0][0], 5, 5, 0)
-    oled.text(city_temps[1][0], 5, 36)
+    oled.text(city_temps[0]['name'], 5, 5, 0)
+    oled.text(city_temps[1]['name'], 5, 36)
 
     # Display city temperatures
-    oled.text('{:4.1f}'.format(city_temps[0][1]), 90, 11, 0)
-    oled.text('{:4.1f}'.format(city_temps[1][1]), 90, 42, 1)
+    oled.text('{:4.1f}'.format(city_temps[0]['temperature']), 90, 11, 0)
+    oled.text('{:4.1f}'.format(city_temps[1]['temperature']), 90, 42, 1)
 
     # Draw full 'progress bar' on bottom line of display
     oled.line(0, oled.height - 1, oled.width, oled.height - 1, 1)
