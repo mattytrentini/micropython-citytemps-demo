@@ -40,9 +40,8 @@ while not wlan.isconnected():
 while True:
     # Query OpenWeatherMap for city temperatures
     api_root = 'https://api.openweathermap.org/data/2.5'
-    api_params = '/group?id={},{}&units=metric&APPID={}'
-    r = requests.get(api_root + api_params.format(config['city1_id'],
-                                                  config['city2_id'],
+    api_params = '/group?id={}&units=metric&APPID={}'
+    r = requests.get(api_root + api_params.format(','.join(str(c) for c in config['city_ids']),
                                                   config['appid']))
     # TODO Check return code. How to handle if not 200?
     # if r.status_code == 200:
