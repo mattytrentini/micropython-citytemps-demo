@@ -8,6 +8,7 @@ import ssd1306
 # Read config
 with open('config.json') as f:
     config = json.load(f)
+    assert len(config['city_ids']) <= 4 # Only four cities will fit on the display
 
 # Initialise OLED
 i2c = I2C(scl=Pin(config['scl_pin']), sda=Pin(config['sda_pin']))
@@ -51,17 +52,22 @@ while True:
     r.close()
     start = time.ticks_ms()
 
-    # Fill top half of display white, bottom half black
-    oled.fill(1)
-    oled.fill_rect(0, oled.height // 2, oled.width, oled.height, 0)
+    oled.fill(0)
+    for city_n, city in enumerate(city_temps):
+        panel_height = oled.height // len(city_temps)
+        panel_top = panel_height * city_n
+        text_colour = city_n % 2 ^ len(city_temps) % 2 # The last panel should have a black background
 
-    # Display city names
-    oled.text(city_temps[0]['name'], 5, 5, 0)
-    oled.text(city_temps[1]['name'], 5, 36)
+        # Draw panel background
+        oled.fill_rect(0, panel_top,                         # x1, y1
+                       oled.width, panel_top + panel_height, # x2, y2 
+                       text_colour ^ 1)                      # colour
 
-    # Display city temperatures
-    oled.text('{:4.1f}'.format(city_temps[0]['temperature']), 90, 11, 0)
-    oled.text('{:4.1f}'.format(city_temps[1]['temperature']), 90, 42, 1)
+        # Display city name (up to 10 characters - to avoid overwriting temperature)
+        oled.text(city['name'][:10], 5, panel_top + (panel_height - char_height) // 2, text_colour)
+
+        # Display city temperatures
+        oled.text('{:4.1f}'.format(city['temperature']), 90, panel_top + (panel_height - char_height) // 2, text_colour)
 
     # Draw full 'progress bar' on bottom line of display
     oled.line(0, oled.height - 1, oled.width, oled.height - 1, 1)
@@ -72,7 +78,7 @@ while True:
     while time.ticks_diff(time.ticks_ms(), start) < config['query_interval_sec'] * 1000:
         time.sleep(config['update_interval_sec'])
         next_query_percent = time.ticks_diff(time.ticks_ms(), start) / (config['query_interval_sec'] * 1000)
-        oled.line(oled.width - int(oled.width * next_query_percent), oled.height - 1,
-                  oled.width, oled.height - 1,
-                  0)
+        oled.line(oled.width - int(oled.width * next_query_percent), oled.height - 1, # x
+                  oled.width, oled.height - 1, # y
+                  0) # colour
         oled.show()

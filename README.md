@@ -23,8 +23,7 @@ A configuration file is supplied in JSON format. Default contents are:
     "ssid": "TestNetwork",
     "ssid_password": "TestNetworkPassword",
     "appid": "b1b15e88fa797225412429c1c50c122a1",    
-    "city1_id": 7286283,
-    "city2_id": 2158177,
+    "city_ids": [7286283, 2158177],
     "query_interval_sec": 30,
     "update_interval_sec": 1,
     "scl_pin": 4,
@@ -41,7 +40,7 @@ _City Temps_ uses [OpenWeatherMap](https://openweathermap.org/)'s [API](https://
 
 When you've registered for a key you need to configure `appid` with it.
 
-Now, since we're querying for temperature data for two cities we need to configure _which_ two cities. We're using OpenWeatherMap's [By city ID](https://openweathermap.org/current#cityid) API - it allows us to query city data using a unique ID for each city in their system. By default `city1_id` is Lausanne, Switzerland, `city2_id` Melbourne, Australia.
+Now, since we're querying for temperature data for multiple cities we need to configure _which_ cities. We're using OpenWeatherMap's [By city ID](https://openweathermap.org/current#cityid) API - it allows us to query city data using a unique ID for each city in their system. By default the first `city_ids` is Lausanne, Switzerland, the second is Melbourne, Australia. Up to four can be configured; no more will fit on the display!.
 
 ### Display config
 
